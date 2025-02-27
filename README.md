@@ -12,4 +12,4 @@
 ### Links
 
 - [Live demo](https://filter-by-category-with-css.vercel.app/)
-- [Github](https://github.com/rolandjlevy/filter-by-category-with-css)
+- [Github](https://github.com/rolandjlevy/filter-by-category-with-js)
