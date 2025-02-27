@@ -4,120 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filter by Category Grid</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        color: #333;
-        background: #e0e0e0;
-      }
-
-      .filters > label {
-        margin-right: 20px;
-        cursor: pointer;
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-        gap: 20px;
-        padding: 0 20px;
-      }
-
-      .box {
-        height: 200px;
-        border: 1px solid #ccc;
-        position: relative;
-      }
-
-      .box::after {
-        position: absolute;
-        display: inline-block;
-        bottom: 10px;
-        left: 10px;
-        font-size: 12px;
-        font-weight: 400;
-        background-color: rgba(0, 0, 0, 0.8);
-        color: #fff;
-        padding: 5px 10px;
-      }
-
-      .box.green {
-        background-color: rgb(0, 170, 0);
-      }
-
-      .box.green::after {
-        content: 'Half-day course';
-      }
-
-      .box.blue {
-        background-color: rgb(0, 106, 206);
-      }
-
-      .box.blue::after {
-        content: 'Day course';
-      }
-
-      .box.red {
-        background-color: red;
-      }
-
-      .box.red::after {
-        content: 'Retreat';
-      }
-
-      .course {
-        text-align: center;
-        box-shadow: 0 0 10px 0 rgba(0, 0, 100, 0.2);
-        background-color: #fff;
-        display: none;
-      }
-      
-      .category-filter-group {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        padding: 20px;
-      }
-
-      @media only screen and (max-width: 480px) {
-        .category-filter-group {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-        }
-      }
-
-      .category-filter {
-        position: absolute;
-        clip: rect(1px, 1px, 1px, 1px);
-        clip-path: polygon(0 0, 0 0, 0 0, 0 0);
-        -webkit-clip-path: polygon(0 0, 0 0, 0 0, 0 0);
-        height: 1px;
-        width: 1px;
-        overflow: hidden;
-        white-space: nowrap;
-      }
-
-      .category-filter + label {
-        margin-bottom: 10px;
-        margin-right: 15px;
-      }
-
-      .category-filter + label > span {
-        border-bottom: 2px solid transparent;
-        display: inline-block;
-        padding-bottom: 3px;
-        margin-left: 5px;
-        cursor: pointer;
-      }
-
-      .category-filter:checked + label > span {
-        border-bottom: 2px solid #333;
-      }
-      
-  </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main>
@@ -126,7 +13,7 @@
         <label for="hdc-filter">🟩<span>Half-day courses</span></label>
 
         <input type="checkbox" id="dc-filter" class="category-filter dc" />
-       <label for="dc-filter">🟦<span>Day courses</span></label>
+        <label for="dc-filter">🟦<span>Day courses</span></label>
 
         <input
           type="checkbox"
@@ -192,32 +79,32 @@
         const searchParams = new URLSearchParams(window.location.search);
         return Object.fromEntries(searchParams.entries());
       }
-      
+
       function handleCheckboxChange(checkbox) {
         const category = checkbox.classList[1];
         const displayValue = checkbox.checked ? 'block' : 'none';
-        document.querySelectorAll('.course.' + category).forEach(course => {
+        document.querySelectorAll('.course.' + category).forEach((course) => {
           course.style.display = displayValue;
         });
       }
 
       const checkboxes = document.querySelectorAll('.category-filter');
-      
+
       function applyFiltersFromUrl() {
-        const filters = 'retreat|hdc'; // getUrlParams().courses || '';
+        const filters = getUrlParams().courses || '';
         const filterList = filters.split('|');
 
-        checkboxes.forEach(checkbox => {
+        checkboxes.forEach((checkbox) => {
           const category = checkbox.classList[1];
           checkbox.checked = filterList.includes(category);
           handleCheckboxChange(checkbox);
-          checkbox.addEventListener('change', () => handleCheckboxChange(checkbox));
+          checkbox.addEventListener('change', () =>
+            handleCheckboxChange(checkbox),
+          );
         });
       }
 
       applyFiltersFromUrl();
     </script>
-
   </body>
 </html>
-
