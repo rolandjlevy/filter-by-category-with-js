@@ -11,5 +11,5 @@
 
 ### Links
 
-- [Live demo](https://filter-by-category-with-css.vercel.app/)
+- [Live demo](https://filter-by-category-with-js.vercel.app/)
 - [Github](https://github.com/rolandjlevy/filter-by-category-with-js)
