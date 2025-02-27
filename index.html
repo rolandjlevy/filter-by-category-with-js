@@ -10,66 +10,66 @@
     <main>
       <section class="category-filter-group">
         <input type="checkbox" id="hdc-filter" class="category-filter hdc" />
-        <label for="hdc-filter">🟩<span>Half-day courses</span></label>
+        <label for="hdc-filter">📗<span>Half-day courses</span></label>
 
         <input type="checkbox" id="dc-filter" class="category-filter dc" />
-        <label for="dc-filter">🟦<span>Day courses</span></label>
+        <label for="dc-filter">📘<span>Day courses</span></label>
 
         <input
           type="checkbox"
           id="retreat-filter"
           class="category-filter retreat"
         />
-        <label for="retreat-filter">🟥<span>Retreats</span></label>
+        <label for="retreat-filter">📕<span>Retreats</span></label>
       </section>
       <section class="grid">
         <div class="course hdc">
-          <div class="box green"></div>
+          <div class="box"></div>
           <p>Course 1</p>
         </div>
 
         <div class="course hdc">
-          <div class="box green"></div>
+          <div class="box"></div>
           <p>Course 2</p>
         </div>
 
         <div class="course dc">
-          <div class="box blue"></div>
+          <div class="box"></div>
           <p>Course 3</p>
         </div>
 
         <div class="course dc">
-          <div class="box blue"></div>
+          <div class="box"></div>
           <p>Course 4</p>
         </div>
 
         <div class="course dc">
-          <div class="box blue"></div>
+          <div class="box"></div>
           <p>Course 5</p>
         </div>
 
         <div class="course retreat">
-          <div class="box red"></div>
+          <div class="box"></div>
           <p>Course 6</p>
         </div>
 
         <div class="course retreat">
-          <div class="box red"></div>
+          <div class="box"></div>
           <p>Course 7</p>
         </div>
 
         <div class="course retreat">
-          <div class="box red"></div>
+          <div class="box"></div>
           <p>Course 8</p>
         </div>
 
         <div class="course retreat">
-          <div class="box red"></div>
+          <div class="box"></div>
           <p>Course 9</p>
         </div>
 
         <div class="course retreat">
-          <div class="box red"></div>
+          <div class="box"></div>
           <p>Course 10</p>
         </div>
       </section>
@@ -81,7 +81,7 @@
       }
 
       function handleCheckboxChange(checkbox) {
-        const category = checkbox.classList[1];
+        const [_, category] = checkbox.classList;
         const displayValue = checkbox.checked ? 'block' : 'none';
         document.querySelectorAll('.course.' + category).forEach((course) => {
           course.style.display = displayValue;
@@ -92,10 +92,9 @@
 
       function applyFiltersFromUrl() {
         const filters = getUrlParams().courses || '';
-        const filterList = filters.split('|');
-
+        const filterList = filters.length ? filters.split('|') : [];
         checkboxes.forEach((checkbox) => {
-          const category = checkbox.classList[1];
+          const [_, category] = checkbox.classList;
           checkbox.checked = filterList.includes(category);
           handleCheckboxChange(checkbox);
           checkbox.addEventListener('change', () =>
